@@ -1,3 +1,20 @@
-.table-row{
-    background-color: #757ce8;
+.table-row {
+  background-color: #757ce8;
 }
+
+a,
+p {
+  text-decoration: none;
+  color: white;
+  margin: auto;
+}
+
+.rowFooter{
+    display: flex;
+}
+
+@media (max-width: 600px) {
+    .rowFooter {
+      display:block;
+    }
+  }

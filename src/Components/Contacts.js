@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
+import "../App.css";
 import axios from "axios";
 import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import Table from "@mui/material/Table";
@@ -134,15 +134,11 @@ function Contacts() {
 
   return (
     <>
-      <Grid container justifyContent="center">
-        <Typography padding="3%" variant="h3">
-          My Contacts List
-        </Typography>
-      </Grid>
-
       {/* Add a contact form */}
-      <Grid container justifyContent="center">
-        <Button onClick={handleOpen}>New Contact</Button>
+      <Grid container justifyContent="center" mt={4}>
+        <Button variant="contained" onClick={handleOpen}>
+          New Contact
+        </Button>
       </Grid>
       {/* Modal for contact form */}
       <Modal
@@ -176,7 +172,7 @@ function Contacts() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Grid mt={2}>
+            <Grid mt={3}>
               <Button variant="outlined" onClick={handleAdd}>
                 Add Contact
               </Button>
@@ -192,7 +188,7 @@ function Contacts() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Grid xs={12} style={{ width: 300, margin: "auto" }}>
+          <Grid style={{ width: 300, margin: "auto" }}>
             <Typography variant="h6">Update Contact</Typography>
             <TextField
               placeholder="First Name"
@@ -248,9 +244,7 @@ function Contacts() {
                       Delete
                     </Button>
                     <Link style={{ textDecoration: "none" }} to="/details">
-                      <Button>
-                        Expand
-                      </Button>
+                      <Button>Expand</Button>
                     </Link>
                   </TableCell>
                   <TableCell>

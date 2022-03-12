@@ -1,19 +1,18 @@
 import React from "react";
-import Contacts from "./Contacts";
-import DetailedContact from "./DetailedContact";
+import Contacts from "./Components/Contacts";
+import DetailedContact from "./Components/DetailedContact";
+import Footer from "./Components/Footer"
+import Header from "./Components/Header";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Grid } from "@mui/material";
+import "./App.css"
 
 function App() {
   return (
     <Router>
+      <Header/>
       <Route exact path="/" component={Contacts} />
       <Route path="/details" component={DetailedContact} />
-      <Grid container margin="5%">
-        <footer style={{ color: "gray", bottom: 0, position: "fixed" }}>
-          <p>Made by Gonzalo Simon</p>
-        </footer>
-      </Grid>
+      <Footer/>
     </Router>
   );
 }
