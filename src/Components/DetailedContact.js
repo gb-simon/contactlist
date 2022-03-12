@@ -8,25 +8,21 @@ import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 
-function DetailedContact() {
-    
-    const contact = {
-        "id": 1,
-        "email": "george.bluth@reqres.in",
-        "first_name": "George",
-        "last_name": "Bluth",
-        "avatar": "https://reqres.in/img/faces/1-image.jpg"
-    }
+function DetailedContact(datalist) {
+
+  const dataList = datalist.location.datalist
+  const indexContact = datalist.location.idNumber
+  const dataMap = dataList[indexContact]
 
   return (
     <Grid  justifyContent="center" align="center" pt={6}>
       <Card sx={{ maxWidth: 345 }}>
-        <CardMedia component="img" image={contact.avatar} alt="a contact portfolio" />
+        <CardMedia component="img" image={dataMap.avatar} alt="a contact portfolio" />
         <CardContent>
-          <Typography gutterBottom variant="h6" component="div">{contact.first_name}</Typography>
-          <Typography gutterBottom variant="h6" component="div">{contact.last_name}</Typography>
+          <Typography gutterBottom variant="h6" component="div">{dataMap.first_name}</Typography>
+          <Typography gutterBottom variant="h6" component="div">{dataMap.last_name}</Typography>
         </CardContent>
-        <Typography gutterBottom variant="h7" component="div">{contact.email}</Typography>
+        <Typography gutterBottom variant="h7" component="div">{dataMap.email}</Typography>
         <CardActions>
           <Link style={{ textDecoration:"none" }} to="/">
             <Button size="small">Go Back</Button>

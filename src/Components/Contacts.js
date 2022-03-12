@@ -11,7 +11,7 @@ import TableRow from "@mui/material/TableRow";
 import Modal from "@mui/material/Modal";
 import { Link } from "react-router-dom";
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: `https://reqres.in/api`,
 });
 
@@ -36,8 +36,8 @@ function Contacts() {
   const [data, setData] = useState([]);
 
   // Edit User States
-
-  const [editIndex, setEditIndex] = useState(0);
+  const [seeMore, setSeeMore] = useState(false);
+  const [editIndex, setEditIndex] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
   const [first_nameUpdate, setFirstNameUpdate] = useState(first_name);
   const [last_nameUpdate, setLastNameUpdate] = useState(last_name);
@@ -132,6 +132,11 @@ function Contacts() {
     return contactToEdit;
   }
 
+  const handleSeeMore = (id_number) => {
+    setSeeMore(true);
+    setEditIndex(findElement(id_number, data));
+  };
+
   return (
     <>
       {/* Add a contact form */}
@@ -161,19 +166,19 @@ function Contacts() {
               placeholder="name"
               value={first_name}
               onChange={(e) => setFirstName(e.target.value)}
-              style={{marginTop: "15px"}}
+              style={{ marginTop: "15px" }}
             />
             <TextField
               placeholder="last name"
               value={last_name}
               onChange={(e) => setLastName(e.target.value)}
-              style={{marginTop: "15px"}}
+              style={{ marginTop: "15px" }}
             />
             <TextField
               placeholder="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              style={{marginTop: "15px"}}
+              style={{ marginTop: "15px" }}
             />
             <Grid mt={3}>
               <Button variant="outlined" onClick={handleAdd}>
@@ -196,28 +201,39 @@ function Contacts() {
             justifyContent="center"
             xs={8}
             style={{ width: 650, margin: "auto" }}
-    
           >
             <Typography variant="h4">Update Contact</Typography>
             <TextField
               placeholder="First Name"
               onChange={(e) => setFirstNameUpdate(e.target.value)}
-              style={{marginTop: "15px"}}
+              style={{ marginTop: "15px" }}
             />
             <TextField
               placeholder="last name"
               onChange={(e) => setLastNameUpdate(e.target.value)}
-              style={{marginTop: "15px"}}
+              style={{ marginTop: "15px" }}
             />
-            <TextField             
-              style={{marginTop: "15px"}}
+            <TextField
+              style={{ marginTop: "15px" }}
               placeholder="email"
               onChange={(e) => setEmailUpdate(e.target.value)}
             />
           </Grid>
-          <Grid mt={3} container justifyContent="center" >
-            <Button variant="outlined" onClick={() => handleUpdate(data[editIndex])} style={{ marginRight:"15px" }}>Save</Button>
-            <Button variant="outlined" onClick={() => updateUser(data[editIndex].id)} style={{ marginLeft:"15px" }}>Back</Button>
+          <Grid mt={3} container justifyContent="center">
+            <Button
+              variant="outlined"
+              onClick={() => handleUpdate(data[editIndex])}
+              style={{ marginRight: "15px" }}
+            >
+              Save
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() => updateUser(data[editIndex].id)}
+              style={{ marginLeft: "15px" }}
+            >
+              Back
+            </Button>
           </Grid>
         </Box>
       </Modal>
@@ -251,15 +267,31 @@ function Contacts() {
                 >
                   {/* Rows of the table: Here every Table Cell is info in a single row  */}
                   <TableCell>
-                    <Button onClick={() => handleUpdate(contact)}>
-                      Update
-                    </Button>
-                    <Button onClick={() => handleDelete(contact.id)}>
-                      Delete
-                    </Button>
-                    <Link style={{ textDecoration: "none" }} to="/details">
-                      <Button>Expand</Button>
-                    </Link>
+                    {seeMore ? (
+                      <div>
+                        <Button onClick={() => handleUpdate(contact)}>
+                          Update
+                        </Button>
+                        <Button onClick={() => handleDelete(contact.id)}>
+                          Delete
+                        </Button>
+
+                        <Link
+                          style={{ textDecoration: "none" }}
+                          to={{
+                            pathname: "/details",
+                            datalist: data,
+                            idNumber: editIndex,
+                          }}
+                        >
+                          <Button>Expand</Button>
+                        </Link>
+                      </div>
+                    ) : (
+                      <Button onClick={() => handleSeeMore(contact.id)}>
+                        More
+                      </Button>
+                    )}
                   </TableCell>
                   <TableCell>
                     <img alt="default user" src={contact.avatar} />
