@@ -161,16 +161,19 @@ function Contacts() {
               placeholder="name"
               value={first_name}
               onChange={(e) => setFirstName(e.target.value)}
+              style={{marginTop: "15px"}}
             />
             <TextField
               placeholder="last name"
               value={last_name}
               onChange={(e) => setLastName(e.target.value)}
+              style={{marginTop: "15px"}}
             />
             <TextField
               placeholder="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              style={{marginTop: "15px"}}
             />
             <Grid mt={3}>
               <Button variant="outlined" onClick={handleAdd}>
@@ -188,23 +191,34 @@ function Contacts() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Grid style={{ width: 300, margin: "auto" }}>
+          <Grid
+            container
+            justifyContent="center"
+            xs={8}
+            style={{ width: 650, margin: "auto" }}
+    
+          >
             <Typography variant="h6">Update Contact</Typography>
             <TextField
               placeholder="First Name"
               onChange={(e) => setFirstNameUpdate(e.target.value)}
+              style={{marginTop: "15px"}}
             />
             <TextField
               placeholder="last name"
               onChange={(e) => setLastNameUpdate(e.target.value)}
+              style={{marginTop: "15px"}}
             />
-            <TextField
+            <TextField             
+              style={{marginTop: "15px"}}
               placeholder="email"
               onChange={(e) => setEmailUpdate(e.target.value)}
             />
           </Grid>
-          <Button onClick={() => handleUpdate(data[editIndex])}>Save</Button>
-          <Button onClick={() => updateUser(data[editIndex].id)}>Back</Button>
+          <Grid mt={3} container justifyContent="center" >
+            <Button variant="outlined" onClick={() => handleUpdate(data[editIndex])} style={{ marginRight:"15px" }}>Save</Button>
+            <Button variant="outlined" onClick={() => updateUser(data[editIndex].id)} style={{ marginLeft:"15px" }}>Back</Button>
+          </Grid>
         </Box>
       </Modal>
 
