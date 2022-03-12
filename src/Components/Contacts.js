@@ -198,7 +198,7 @@ function Contacts() {
             style={{ width: 650, margin: "auto" }}
     
           >
-            <Typography variant="h6">Update Contact</Typography>
+            <Typography variant="h4">Update Contact</Typography>
             <TextField
               placeholder="First Name"
               onChange={(e) => setFirstNameUpdate(e.target.value)}
@@ -226,7 +226,7 @@ function Contacts() {
 
       <TableContainer>
         <Table
-          style={{ width: 650, margin: "auto", marginTop: "3%" }}
+          style={{ width: 1000, margin: "auto", marginTop: "3%" }}
           component={Paper}
           sx={{ minWidth: 650 }}
           aria-label="simple table"
